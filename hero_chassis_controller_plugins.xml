@@ -1,0 +1,12 @@
+<library path="lib/libhero_chassis_controller">
+  <class name="hero_chassis_controller/HeroChassisController"
+         type="hero_chassis_controller::HeroChassisController"
+         base_class_type="controller_interface::ControllerBase">
+    <description>
+      Mecanum chassis controller for the RoboMaster hero robot.
+      Requires an EffortJointInterface hardware interface.
+      Implements inverse/forward kinematics, four per-wheel PID loops,
+      odometry with tf broadcast and an optional world-frame velocity mode.
+    </description>
+  </class>
+</library>
