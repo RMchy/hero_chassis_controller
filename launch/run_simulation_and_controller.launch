@@ -1,0 +1,26 @@
+<launch>
+  <!-- Use "simple" rollers during development (much faster),
+       switch to "realistic" when recording the final demo video. -->
+  <arg name="roller_type" default="simple"/>
+  <arg name="paused" default="false"/>
+
+  <include file="$(find rm_description_for_task)/launch/hero.launch">
+    <arg name="load_chassis" value="true"/>
+    <arg name="roller_type" value="$(arg roller_type)"/>
+    <arg name="paused" value="$(arg paused)"/>
+  </include>
+
+  <rosparam file="$(find hero_chassis_controller)/config/controllers.yaml" command="load"/>
+
+  <node name="controller_spawner" pkg="controller_manager" type="spawner"
+        respawn="false" output="screen"
+        args="controller/hero_chassis_controller
+              controller/joint_state_controller"/>
+
+  <!-- Keyboard teleop for testing and for the demo video (assignment 8) -->
+  <node name="teleop_keyboard" pkg="teleop_twist_keyboard" type="teleop_twist_keyboard.py"
+        output="screen"/>
+
+  <!-- Optional: rviz for visualising tf and odometry -->
+  <!-- <node name="rviz" pkg="rviz" type="rviz"/> -->
+</launch>

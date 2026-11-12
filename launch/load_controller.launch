@@ -1,0 +1,10 @@
+<launch>
+  <!-- Load and start the controllers against an ALREADY RUNNING gazebo /
+       real robot. Use this when the simulation was launched separately. -->
+  <rosparam file="$(find hero_chassis_controller)/config/controllers.yaml" command="load"/>
+
+  <node name="controller_spawner" pkg="controller_manager" type="spawner"
+        respawn="false" output="screen"
+        args="controller/hero_chassis_controller
+              controller/joint_state_controller"/>
+</launch>

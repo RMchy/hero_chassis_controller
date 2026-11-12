@@ -1,0 +1,52 @@
+controller:
+  hero_chassis_controller:
+    type: hero_chassis_controller/HeroChassisController
+
+    # Kinematic parameters, measured from rm_description_for_task URDF.
+    wheel_radius: 0.07625
+    wheel_track: 0.4
+    wheel_base: 0.4
+
+    # Assignment 7: "base_link" (robot frame) or "odom" (world frame)
+    velocity_mode: "base_link"
+
+    # Right-side sign compensation. The URDF gives the right wheels a NEGATIVE
+    # mechanical reduction (-19.2032), so the effective direction may be flipped.
+    # Verify experimentally (see today's checklist, step 3): set true if pressing
+    # "forward" on the keyboard makes the robot drive BACKWARD or spin.
+    flip_right_side: true
+
+    # Assignment 8: acceleration limit in m/s^2. 0 disables the limiter.
+    max_acceleration: 5.0
+
+    # Assignment 4: one PID per wheel.
+    # Verify the exact parameter names in /opt/ros/noetic/include/control_toolbox/pid.h
+    # before trusting these keys.
+    left_front_pid:
+      p: 2.0
+      i: 0.1
+      d: 0.0
+      i_clamp_max: 0.5
+      i_clamp_min: -0.5
+    right_front_pid:
+      p: 2.0
+      i: 0.1
+      d: 0.0
+      i_clamp_max: 0.5
+      i_clamp_min: -0.5
+    left_back_pid:
+      p: 2.0
+      i: 0.1
+      d: 0.0
+      i_clamp_max: 0.5
+      i_clamp_min: -0.5
+    right_back_pid:
+      p: 2.0
+      i: 0.1
+      d: 0.0
+      i_clamp_max: 0.5
+      i_clamp_min: -0.5
+
+  joint_state_controller:
+    type: joint_state_controller/JointStateController
+    publish_rate: 50
